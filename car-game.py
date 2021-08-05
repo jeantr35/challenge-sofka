@@ -55,6 +55,7 @@ class Carro:
         self.distancia += dado * 100
         if self.distancia >= juego1.pista.longitud:
             self.distancia = juego1.pista.longitud
+        print(f'El carro de {self.conductor.nombre} ha recorrido un total de {self.distancia} metros')
 
     def asignar_conductor(self, nombre):
         self.conductor = Conductor(nombre)
@@ -102,12 +103,16 @@ class Juego:
 
     def __init__(self, pista):
         self.pista = pista
+        self.podio = 1
 
     def iniciar_juego(self):
         for jugador in self.pista.carril:
             if jugador.carro.distancia < self.pista.longitud:
-                jugador.carro.avanzar()
-                print(f'El carro de {jugador.carro.conductor.nombre} ha recorrido un total de {jugador.carro.distancia} metros')     
+                jugador.carro.avanzar()     
+            elif jugador != podio1.primero and jugador != podio1.segundo:
+                jugador.asignar_posicion(self.podio)
+                podio1.asignar_podio(jugador)
+                self.podio +=1
 
 
 if __name__ == "__main__":
@@ -130,7 +135,18 @@ if __name__ == "__main__":
 
     #Iniciamos el juego
     juego1 = Juego(pista1)
-    juego1.iniciar_juego()
+    while True:
+        print('')
+        juego1.iniciar_juego()
+        if (podio1.primero != None) and (podio1.segundo != None) and (podio1.tercero != None):
+            print(f"""
+    El podio queda de la siguiente manera:
+        1 {podio1.primero.carro.conductor.nombre}
+            2 {podio1.segundo.carro.conductor.nombre}
+                3 {podio1.tercero.carro.conductor.nombre}
+            """)
+            break
+        
 
 
     
