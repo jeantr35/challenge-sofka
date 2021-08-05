@@ -10,6 +10,25 @@ Bienvenido al menu de pistas
 Por favor seleccione una ingresando el numero
 """
 
+menu_conductores = """
+0- Jean Trujillo
+1- Steven Aaron
+2- Juan Perez
+3- Lucas Hernandez
+4- Pedro Vega
+
+Por favor seleccionelo ingresando el numero
+"""
+
+lista_conductores = ['Jean Trujillo', 'Steven Aaron', 'Juan Perez', 'Lucas Hernandez', 'Pedro Vega']
+
+
+class Conductor:
+
+    def __init__(self, nombre):
+        self.nombre = nombre #Nombre del conductor
+
+
 class Carro:
 
     def __init__(self, modelo, conductor, distancia=0):
@@ -23,11 +42,8 @@ class Carro:
         self.distancia += dado * 100
         print(f'El carro ha recorrido un total de {self.distancia} metros')
 
-
-class Conductor:
-
-    def __init__(self, nombre):
-        self.nombre = nombre #Nombre del conductor
+    def asignar_conductor(self, nombre):
+        self.conductor = Conductor(nombre)
 
 
 class Pista:
@@ -45,9 +61,12 @@ if __name__ == "__main__":
     jugadores = int(input('Por favor ingrese el numero de jugadores: '))
     nombre_pista = int(input(menu_pistas))
     menu_pistas = ['Alabama internatonal dragway', 'Atco Dragway', 'Atlanta dragway']
+    conductores = [int(input(f'Jugador{i+1} selecciona tu conductor {menu_conductores}')) for i in range(jugadores)]
     pista1 = Pista(jugadores, menu_pistas[nombre_pista])
     pista1.crear_carriles()
-
-
+        #Crearemos los conductores para cada carro
+    for i in range(len(pista1.carril)):
+        pista1.carril[i].asignar_conductor(lista_conductores[conductores[i]]) 
+        print(pista1.carril[i].conductor.nombre)
 
     
