@@ -21,6 +21,7 @@ Por favor seleccionelo ingresando el numero
 """
 
 lista_conductores = ['Jean Trujillo', 'Steven Aaron', 'Juan Perez', 'Lucas Hernandez', 'Pedro Vega']
+menu_pistas = ['Alabama internatonal dragway', 'Atco Dragway', 'Atlanta dragway']
 
 
 class Conductor:
@@ -54,17 +55,19 @@ class Pista:
         self.carril = [] #Cada elemento de la lista representa un carril con un carro
 
     def crear_carriles(self): #Metodo para crear los carriles con sus carros
-        self.carril = [Carro('Mazda 3', i, 'Piston') for i in range(self.carriles)] 
+        self.carril = [Carro('Mazda 3', i, 'Piston') for i in range(self.carriles)] #List comprehension
 
 
 if __name__ == "__main__":
     jugadores = int(input('Por favor ingrese el numero de jugadores: '))
     nombre_pista = int(input(menu_pistas))
-    menu_pistas = ['Alabama internatonal dragway', 'Atco Dragway', 'Atlanta dragway']
     conductores = [int(input(f'Jugador{i+1} selecciona tu conductor {menu_conductores}')) for i in range(jugadores)]
+    
     pista1 = Pista(jugadores, menu_pistas[nombre_pista])
     pista1.crear_carriles()
+
         #Crearemos los conductores para cada carro
+
     for i in range(len(pista1.carril)):
         pista1.carril[i].asignar_conductor(lista_conductores[conductores[i]]) 
         print(pista1.carril[i].conductor.nombre)
