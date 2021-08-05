@@ -44,7 +44,7 @@ class Conductor:
 
 class Carro:
 
-    def __init__(self, modelo, conductor, distancia=0):
+    def __init__(self, modelo, distancia=0):
         self.modelo = modelo
         self.distancia = distancia
         self.conductor = None #Conductor aun no asignado
@@ -59,6 +59,16 @@ class Carro:
         self.conductor = Conductor(nombre)
 
 
+class Jugador:
+
+    def __init__(self, carro):
+        self.carro = carro
+        self.posicion = None
+
+    def asignar_posicion(self,posicion):
+        self.posicion = posicion
+
+
 class Pista:
 
     def __init__(self, carriles, nombre_pista, longitud=2000):
@@ -68,7 +78,7 @@ class Pista:
         self.longitud = longitud
 
     def crear_carriles(self): #Metodo para crear los carriles con sus carros
-        self.carril = [Carro('Mazda 3', i, 'Piston') for i in range(self.carriles)] #List comprehension
+        self.carril = [Jugador(None) for i in range(self.carriles)] #List comprehension
 
 
 if __name__ == "__main__":
@@ -82,7 +92,7 @@ if __name__ == "__main__":
 
         #Crearemos los conductores para cada carro
 
-    for i in range(len(pista1.carril)):
+    for i in range(len(pista1.carril)): #ESto debe de cambiar!!!!
         pista1.carril[i].asignar_conductor(lista_conductores[conductores[i]]) 
         print(pista1.carril[i].conductor.nombre)
 
