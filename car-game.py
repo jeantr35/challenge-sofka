@@ -49,10 +49,11 @@ class Carro:
 
 class Pista:
 
-    def __init__(self, carriles, nombre_pista):
+    def __init__(self, carriles, nombre_pista, longitud=2000):
         self.carriles = carriles #Numero de carriles
         self.nombre_pista = nombre_pista
         self.carril = [] #Cada elemento de la lista representa un carril con un carro
+        self.longitud = longitud
 
     def crear_carriles(self): #Metodo para crear los carriles con sus carros
         self.carril = [Carro('Mazda 3', i, 'Piston') for i in range(self.carriles)] #List comprehension
