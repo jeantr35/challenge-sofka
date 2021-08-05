@@ -74,11 +74,11 @@ class Pista:
     def __init__(self, carriles, nombre_pista, longitud=2000):
         self.carriles = carriles #Numero de carriles
         self.nombre_pista = nombre_pista
-        self.carril = [] #Cada elemento de la lista representa un carril con un carro
+        self.carril = [] #Cada elemento de la lista representa un carril con un jugador
         self.longitud = longitud
 
-    def crear_carriles(self): #Metodo para crear los carriles con sus carros
-        self.carril = [Jugador(None) for i in range(self.carriles)] #List comprehension
+    def crear_carriles(self): #Metodo para crear los carriles con sus jugadores
+        self.carril = [Jugador(carros[i]) for i in range(self.carriles)] #List comprehension
 
 
 if __name__ == "__main__":
@@ -86,14 +86,16 @@ if __name__ == "__main__":
     nombre_pista = int(input(menu_pistas))
     conductores = [int(input(f'Jugador{i+1} selecciona tu conductor {menu_conductores}')) for i in range(jugadores)]
     menu_pistas = ['Alabama internatonal dragway', 'Atco Dragway', 'Atlanta dragway']
-    
+    carros = [lista_carros[int(input(f'Jugador{i+1} selecciona tu carro {menu_carros}'))] for i in range(jugadores)]
+    carros = [Carro(carros[i]) for i in range(len(carros))] 
+
     pista1 = Pista(jugadores, menu_pistas[nombre_pista])
     pista1.crear_carriles()
 
         #Crearemos los conductores para cada carro
 
-    for i in range(len(pista1.carril)): #ESto debe de cambiar!!!!
-        pista1.carril[i].asignar_conductor(lista_conductores[conductores[i]]) 
-        print(pista1.carril[i].conductor.nombre)
+    for i in range(len(pista1.carril)): 
+        pista1.carril[i].carro.asignar_conductor(lista_conductores[conductores[i]])
+        print(f'Jugador{i+1} {pista1.carril[i].carro.modelo} {pista1.carril[i].carro.conductor.nombre}')
 
     
