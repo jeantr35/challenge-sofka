@@ -69,6 +69,22 @@ class Jugador:
         self.posicion = posicion
 
 
+class Podio:
+
+    def __init__(self, primero=None, segundo=None, tercero=None):
+        self.primero = primero
+        self.segundo = segundo
+        self.tercero = tercero
+
+    def asignar_podio(self,jugador):
+        if jugador.posicion == 1:
+            self.primero = jugador
+        elif jugador.posicion == 2:
+            self.segundo = jugador
+        elif jugador.posicion == 3:
+            self.tercero = jugador
+
+
 class Pista:
 
     def __init__(self, carriles, nombre_pista, longitud=2000):
@@ -91,6 +107,7 @@ if __name__ == "__main__":
 
     pista1 = Pista(jugadores, menu_pistas[nombre_pista])
     pista1.crear_carriles()
+    podio1 = Podio()
 
         #Crearemos los conductores para cada carro
 
