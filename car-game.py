@@ -11,6 +11,7 @@ Por favor seleccione una ingresando el numero
 """
 
 menu_conductores = """
+
 0- Jean Trujillo
 1- Steven Aaron
 2- Juan Perez
@@ -20,8 +21,19 @@ menu_conductores = """
 Por favor seleccionelo ingresando el numero
 """
 
+menu_carros = """
+
+0- Mercedes W11
+1- Red Bull RB16
+2- McLaren MCL35
+3- Toyota TS050 Hybrid
+4- Toyota Yaris WRC
+
+Por favor seleccionelo ingresando el numero
+"""
+
 lista_conductores = ['Jean Trujillo', 'Steven Aaron', 'Juan Perez', 'Lucas Hernandez', 'Pedro Vega']
-menu_pistas = ['Alabama internatonal dragway', 'Atco Dragway', 'Atlanta dragway']
+lista_carros = ['Mercedes W11','Red Bull RB16','McLaren MCL35','Toyota TS050 Hybrid','Toyota Yaris WRC.']
 
 
 class Conductor:
@@ -63,6 +75,7 @@ if __name__ == "__main__":
     jugadores = int(input('Por favor ingrese el numero de jugadores: '))
     nombre_pista = int(input(menu_pistas))
     conductores = [int(input(f'Jugador{i+1} selecciona tu conductor {menu_conductores}')) for i in range(jugadores)]
+    menu_pistas = ['Alabama internatonal dragway', 'Atco Dragway', 'Atlanta dragway']
     
     pista1 = Pista(jugadores, menu_pistas[nombre_pista])
     pista1.crear_carriles()
