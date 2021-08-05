@@ -53,7 +53,8 @@ class Carro:
     def avanzar(self): #Metodo usado para avanzar aleatoriamente
         dado = random.randrange(1,7)
         self.distancia += dado * 100
-        print(f'El carro ha recorrido un total de {self.distancia} metros')
+        if self.distancia >= juego1.pista.longitud:
+            self.distancia = juego1.pista.longitud
 
     def asignar_conductor(self, nombre):
         self.conductor = Conductor(nombre)
@@ -97,6 +98,18 @@ class Pista:
         self.carril = [Jugador(carros[i]) for i in range(self.carriles)] #List comprehension
 
 
+class Juego:
+
+    def __init__(self, pista):
+        self.pista = pista
+
+    def iniciar_juego(self):
+        for jugador in self.pista.carril:
+            if jugador.carro.distancia < self.pista.longitud:
+                jugador.carro.avanzar()
+                print(f'El carro de {jugador.carro.conductor.nombre} ha recorrido un total de {jugador.carro.distancia} metros')     
+
+
 if __name__ == "__main__":
     jugadores = int(input('Por favor ingrese el numero de jugadores: '))
     nombre_pista = int(input(menu_pistas))
@@ -114,5 +127,10 @@ if __name__ == "__main__":
     for i in range(len(pista1.carril)): 
         pista1.carril[i].carro.asignar_conductor(lista_conductores[conductores[i]])
         print(f'Jugador{i+1} {pista1.carril[i].carro.modelo} {pista1.carril[i].carro.conductor.nombre}')
+
+    #Iniciamos el juego
+    juego1 = Juego(pista1)
+    juego1.iniciar_juego()
+
 
     
