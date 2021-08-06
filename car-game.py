@@ -1,4 +1,5 @@
 import random
+import json
 
 menu_pistas = """
 Bienvenido al menu de pistas
@@ -86,6 +87,9 @@ class Podio:
         elif jugador.posicion == 3:
             self.tercero = jugador
 
+    def guardar_podio(self):
+        pass
+
 
 class Pista:
 
@@ -110,13 +114,16 @@ class Juego:
             if jugador.carro.distancia < self.pista.longitud:
                 jugador.carro.avanzar()     
             elif jugador != podio1.primero and jugador != podio1.segundo:
-                jugador.asignar_posicion(self.podio)
-                podio1.asignar_podio(jugador)
-                self.podio +=1
+                self.asignar_podio(jugador)
+
+    def asignar_podio(self, jugador):
+        jugador.asignar_posicion(self.podio)
+        podio1.asignar_podio(jugador)
+        self.podio +=1
 
 
 if __name__ == "__main__":
-    jugadores = int(input('Por favor ingrese el numero de jugadores: '))
+    jugadores = int(input('Por favor ingrese el numero de jugadores (Minimo 3): '))
     nombre_pista = int(input(menu_pistas))
     conductores = [int(input(f'Jugador{i+1} selecciona tu conductor {menu_conductores}')) for i in range(jugadores)]
     menu_pistas = ['Alabama internatonal dragway', 'Atco Dragway', 'Atlanta dragway']
