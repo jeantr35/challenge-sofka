@@ -1,10 +1,10 @@
 import random
-import json
+
 
 menu_pistas = """
 Bienvenido al menu de pistas
 
-0- Alabama internatonal dragway
+0- Alabama internatonal dragway 
 1- Atco Dragway
 2- Atlanta dragway
 
@@ -88,8 +88,19 @@ class Podio:
             self.tercero = jugador
 
     def guardar_podio(self):
-        pass
-
+        with open("./podio.txt", "a", encoding="utf-8") as f:
+            f.write(f'Primer lugar: {self.primero.carro.conductor.nombre} con el carro: {self.primero.carro.modelo}\n')
+            f.write(f'Segundo lugar: {self.segundo.carro.conductor.nombre} con el carro: {self.segundo.carro.modelo}\n')
+            f.write(f'Tercer lugar: {self.tercero.carro.conductor.nombre} con el carro: {self.tercero.carro.modelo}\n')
+            f.write(f'Pista: {pista1.nombre_pista}\n')
+            f.close()
+    
+    def mostrar_victorias(self, jugador, contador=0):
+        with open("./podio.txt", "r", encoding="utf-8") as f:
+            for linea in f:
+                if jugador.carro.conductor.nombre in linea:
+                    contador +=1
+        return contador
 
 class Pista:
 
@@ -146,13 +157,15 @@ if __name__ == "__main__":
         print('')
         juego1.iniciar_juego()
         if (podio1.primero != None) and (podio1.segundo != None) and (podio1.tercero != None):
-            print(f"""
-    El podio queda de la siguiente manera:
-        1 {podio1.primero.carro.conductor.nombre}
-            2 {podio1.segundo.carro.conductor.nombre}
-                3 {podio1.tercero.carro.conductor.nombre}
-            """)
             break
+    podio1.guardar_podio()
+
+    print(f"""
+El podio queda de la siguiente manera:
+    1 {podio1.primero.carro.conductor.nombre} con un total de {podio1.mostrar_victorias(podio1.primero)} victorias
+        2 {podio1.segundo.carro.conductor.nombre} con un total de {podio1.mostrar_victorias(podio1.segundo)} victorias
+            3 {podio1.tercero.carro.conductor.nombre} con un total de {podio1.mostrar_victorias(podio1.tercero)} victorias
+    """)
         
 
 
